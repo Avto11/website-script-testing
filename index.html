@@ -1,58 +1,312 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QSkip</title>
+    <title>QSkip - ციფრული რიგების პლატფორმა</title>
     <style>
-        body {
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --primary: #0066cc;
+            --accent: #2ecc71;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            background-color: #0d141c; /* Deep dark blue background */
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
         .container {
-            max-width: 400px;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
         }
+
+        /* Hero Section */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 1px solid #334155;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+        }
+
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
+            color: var(--text-main);
             margin-bottom: 10px;
-            background: linear-gradient(45deg, #0070f3, #00df89); /* Blue to Green gradient */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
-        p {
+
+        .tagline {
             font-size: 1.2rem;
-            color: #708090;
-            margin-top: 0;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: bold;
         }
-        .tag {
-            display: inline-block;
-            background-color: rgba(0, 223, 137, 0.1);
-            color: #00df89;
-            padding: 6px 16px;
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .badge {
+            background-color: var(--primary);
+            padding: 6px 15px;
             border-radius: 20px;
-            font-weight: 600;
             font-size: 0.9rem;
-            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .badge.funding {
+            background-color: #e67e22;
+        }
+
+        /* Main Content Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        section {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #334155;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Team Cards */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .member-card {
+            background-color: #111827;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #1e293b;
+        }
+
+        .member-name {
+            font-weight: bold;
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        .member-role {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .member-contact {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            word-break: break-all;
+        }
+
+        /* Sidebar Styling */
+        .sidebar-section {
+            background-color: #111827;
+            border: 1px dashed var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            margin-top: 60px;
         }
     </style>
 </head>
 <body>
 
+    <header>
+        <div class="container">
+            <!-- თუ ლოგოს სახელი favicon.png-ა, აქ გამოჩნდება -->
+            <img src="favicon.png" alt="QSkip Logo" class="logo-placeholder" onerror="this.style.display='none'">
+            <h1>QSkip</h1>
+            <div class="tagline">ციფრული რიგების პლატფორმა</div>
+            <p style="max-width: 700px; margin: 0 auto; text-align: center;">
+                გუნდი: <strong>ფიზმათGPT</strong>[cite: 1]
+            </p>
+            <div class="meta-info">
+                <span class="badge">ინდუსტრია: SaaS / ციფრული ტრანსფორმაცია</span>[cite: 1]
+                <span class="badge funding">მოთხოვნილი თანხა: 25,000 ლარი</span>[cite: 1]
+            </div>
+        </div>
+    </header>
+
     <div class="container">
-        <h1>QSkip</h1>
-        <p>ციფრული რიგების პლატფორმა, რომელიც საშუალებას აძლევს მომხმარებელს ონლაინ „დადგეს“ ნებისმიერი პარტნიორი ობიექტის რიგში და თავიდან აიცილოს ფიზიკურ სივრცეში ლოდინი, მივიდეს ადგილზე ზუსტად მაშინ, როცა მისი რიგი იქნება, ხოლო ბიზნესებს დაეხმაროს მომხმარებელთა ნაკადების უკეთ მართვაში.</p>
-        <span class="tag">Coming Soon / მალე</span>
+        <div class="grid">
+            
+            <!-- მარცხენა ძირითადი სვეტი -->
+            <main>
+                <section id="about">
+                    <h2>პროექტის შესახებ</h2>
+                    <p>QSkip არის ციფრული რიგების პლატფორმა, რომელიც საშუალებას აძლევს მომხმარებელს ონლაინ „დადგეს“ ნებისმიერი პარტნიორი ობიექტის რიგში და თავიდან აიცილოს ფიზიკურ სივრცეში ლოდინი[cite: 1]. მომხმარებელი ადგილზე მიდის ზუსტად მაშინ, როცა მისი რიგი იქნება, ხოლო ბიზნესები იღებენ ეფექტურ ინსტრუმენტს მომხმარებელთა ნაკადების უკეთ მართვისთვის[cite: 1].</p>
+                </section>
+
+                <section id="problem">
+                    <h2>პრობლემა და აქტუალურობა</h2>
+                    <p>ფიზიკურ რიგებში დგომა მომხმარებლისთვის დროის კარგვასა და სტრესს იწვევს, ხოლო ბიზნესებისთვის ქაოტური ხალხმრავლობა დიდ გამოწვევას წარმოადგენს[cite: 1]. ბაზარზე არსებული ფიზიკური აპარატები ძვირია, ლოკალურია და მაინც ადგილზე ყოფნას მოითხოვს[cite: 1].</p>
+                    <p>კვლევების მიხედვით, ადამიანი ცხოვრების განმავლობაში საშუალოდ 6 თვეს რიგებში ატარებს, ხოლო მომხმარებელთა 70%-ზე მეტი უარს ამბობს სერვისზე, თუ გრძელ რიგს ხედავს[cite: 1]. ბიზნესები ამის გამო კარგავენ პოტენციურ შემოსავალს[cite: 1].</p>
+                </section>
+
+                <section id="solution">
+                    <h2>პრობლემის გადაჭრა</h2>
+                    <p>QSkip არის ინოვაციური B2B2C პლატფორმა, რომელიც ტრადიციულ რიგებს სრულად აციფრულებს[cite: 1]. განსხვავებით ძველი, ფიზიკური აპარატებისგან, QSkip არის მოქნილი SaaS გადაწყვეტა ბიზნესებისთვის, რომელიც მინიმალური დანახარჯით ოპტიმიზაციას უკეთებს მომხმარებელთა ნაკადს, ამცირებს სივრცეში ხალხმრავლობას და ზრდის მომსახურების ეფექტურობას ანალიტიკური ხელსაწყოების დახმარებით[cite: 1].</p>
+                </section>
+
+                <section id="ai-component">
+                    <h2>AI (ხელოვნური ინტელექტი) კომპონენტი</h2>
+                    <p>აპლიკაცია ხელოვნური ინტელექტის დახმარებით ითვლის მომხმარებლის ობიექტზე მისვლის ოპტიმალურ დროს, რა დროსაც ითვალისწინებს გზებზე არსებულ მოძრაობას, ობიექტის მიმდინარე დატვირთვასა და მომსახურების საშუალო სიჩქარეს[cite: 1].</p>
+                    <p>მანქანური სწავლების (Machine Learning) ალგორითმები აანალიზებენ ძველ მონაცემებს, რაც მომხმარებელს ეხმარება წინა დღით ან უფრო ადრე დაჯავშნოს ადგილი რიგში, პიკის საათების გათვალისწინებით[cite: 1]. ბიზნესებისთვის კი AI წინასწარ განსაზღვრავს მოთხოვნას პერსონალის რესურსის ეფექტურად განაწილებისთვის[cite: 1].</p>
+                </section>
+
+                <section id="market">
+                    <h2>ბაზრის შესაძლებლობა და მომხმარებლები</h2>
+                    <p>საქართველოში შემომავალი მილიონობით ტურისტი, რომელთათვისაც დრო შეზღუდული რესურსია, ქმნის დიდ, მასშტაბირებად ბაზარს[cite: 1]. სერვისი თანაბრად ორიენტირებულია ადგილობრივ მომხმარებლებზეც[cite: 1].</p>
+                    <ul>
+                        <li><strong>B2C:</strong> უცხოელი ტურისტები (ენობრივი ბარიერის გარეშე) და ადგილობრივი მაცხოვრებლები, რომლებიც უფრთხილდებიან დროს[cite: 1].</li>
+                        <li><strong>B2B:</strong> ტურისტულად აქტიურ ზონებში მოქმედი კაფე-რესტორნები, მუზეუმები, კლინიკები და სხვა ობიექტები[cite: 1].</li>
+                    </ul>
+                </section>
+
+                <section id="team">
+                    <h2>ჩვენი გუნდი</h2>
+                    <div class="team-grid">
+                        <div class="member-card">
+                            <div class="member-name">ავთანდილ ნიკოლეიშვილი</div>[cite: 1]
+                            <div class="member-role">გუნდის ლიდერი / მთავარი დეველოპერი, პროდუქტის არქიტექტორი</div>[cite: 1]
+                            <div class="member-contact">📞 595956795<br>✉️ nikoleishvili.avtandili@gmail.com</div>[cite: 1]
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">ელენე ბერაძე</div>[cite: 1]
+                            <div class="member-role">UI/UX და მომხმარებლის გამოცდილების მკვლევარი</div>[cite: 1]
+                            <div class="member-contact">📞 592079992<br>✉️ eleneberadze570@gmail.com</div>[cite: 1]
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">მაქსიმე ორმოცაძე</div>[cite: 1]
+                            <div class="member-role">ბაზრის კვლევა და მონაცემთა ანალიზი</div>[cite: 1]
+                            <div class="member-contact">📞 597800734<br>✉️ maxmax09142011@gmail.com</div>[cite: 1]
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">ნიკოლოზ გველესიანი</div>[cite: 1]
+                            <div class="member-role">ბიზნესის განვითარება და პარტნიორების მოძიება</div>[cite: 1]
+                            <div class="member-contact">📞 598323044<br>✉️ nikolozgvelesiani910@gmail.com</div>[cite: 1]
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">თეკლა ჩოგოვაძე</div>[cite: 1]
+                            <div class="member-role">ბრენდინგისა და კრეატიული მიმართულების ლიდერი</div>[cite: 1]
+                            <div class="member-contact">📞 599177442<br>✉️ tekla0401@gmail.com</div>[cite: 1]
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- მარჯვენა დამხმარე სვეტი (ბიზნეს მოდელი & სტრატეგია) -->
+            <aside>
+                <section class="sidebar-section">
+                    <h2>ბიზნეს მოდელი</h2>[cite: 1]
+                    <p><strong>Priority Queues:</strong> ფასიანი პრიორიტეტული რიგები მომენტალური მომსახურებისთვის. შემოსავალი იყოფა ობიექტთან[cite: 1].</p>
+                    <p><strong>SaaS გამომწერა:</strong> პარტნიორი ობიექტების ყოველთვიური ფიქსირებული სააბონენტო ტარიფი (Basic & Pro)[cite: 1].</p>
+                    <p><strong>რეკლამა და მარკეტინგი:</strong> პარტნიორების პრიორიტეტული გამოჩენა ძიებასა და რუკაზე[cite: 1].</p>
+                </section>
+
+                <section class="sidebar-section">
+                    <h2>კონკურენტული უპირატესობა</h2>[cite: 1]
+                    <p>სისტემა არ მოითხოვს ფიზიკურ აპარატებს ობიექტზე — პროცესი სრულად სმარტფონში ხდება[cite: 1]. რიგები ცენტრალიზებულია, რაც ერთ აპლიკაციაში უამრავი სხვადასხვა ობიექტის რიგის მართვის საშუალებას იძლევა[cite: 1].</p>
+                </section>
+
+                <section class="sidebar-section">
+                    <h2>Go-To-Market გეგმა</h2>[cite: 1]
+                    <p><strong>B2B:</strong> 10 პოპულარულ კაფესა და მუზეუმთან თანამშრომლობა და მათთვის 3-თვიანი უფასო Beta პერიოდის შეთავაზება[cite: 1].</p>
+                    <p><strong>B2C:</strong> ფიზიკურ სივრცეებში QR კოდების განთავსება და აქტიური სოციალური მედია კამპანია[cite: 1].</p>
+                </section>
+                
+                <section class="sidebar-section">
+                    <h2>მენტორინგის საჭიროება</h2>[cite: 1]
+                    <p>დახმარება AI ტექნიკურ მხარესა და მანქანური სწავლების ალგორითმების გამართვაში[cite: 1]. ასევე, ფინანსურ გათვლებსა და პრიორიტეტული ტარიფების სწორად განსაზღვრაში[cite: 1].</p>
+                </section>
+            </aside>
+
+        </div>
     </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 QSkip. ყველა უფლება დაცულია. შექმნილია ფიზმათGPT-ის მიერ.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
